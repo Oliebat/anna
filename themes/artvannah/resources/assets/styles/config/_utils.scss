@@ -1,4 +1,6 @@
 @use "../config/breakpoints" as *;
+@use "../config/sizes" as *;
+@use "../config/variables" as *;
 
 .u-nsb {
   /* stylelint-disable-next-line */
@@ -38,3 +40,13 @@
 }
 
 .u-hidden { display: none; }
+
+.u-font-tag { @include tag; }
+
+.u-hover {
+  @media (hover: hover) {
+    transition: opacity 0.5s $ease-smooth;
+
+    &:hover { opacity: 0.7; }
+  }
+}

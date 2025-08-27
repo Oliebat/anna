@@ -18,7 +18,7 @@
     <div></div>
   </div>
   @if (!empty($data['image']))
-    <div class="b-hero__image">@include('elements/image', [data => $data['image']])</div>
+    <div class="b-hero__image">@include('elements/image', ['data' => $data['image']])</div>
   @endif
   <h1 class="b-hero__title">{!! wpautop($data['title']) !!}</h1>
 </section>

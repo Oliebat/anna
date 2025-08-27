@@ -7,6 +7,10 @@
   width: 100%;
   z-index: $z-header;
   font-weight: $semi-bold;
+  color: $white;
+  transition: color 0.5s $ease-smooth;
+
+  &--dark { color: $black; }
 
   &__wrapper {
     display: flex;
@@ -14,4 +18,6 @@
     align-items: center;
     padding: 2rem 0;
   }
+
+  &__button { text-transform: uppercase; }
 }

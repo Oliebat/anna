@@ -41,4 +41,31 @@ class Block extends Controller {
           'image' => Element::image($data['image'], '1920px')
       ];
   }
+
+  public static function projects($data) {
+  foreach ($data['projects'] as $item) {
+    if ($item) {
+      $items[] = [
+        'title' => get_the_title($item),
+        'link' => get_permalink($item),
+        'date' => get_field('date', $item),
+        'tags' => get_the_tags( $item),
+        'image' => Element::image(get_post_thumbnail_id($item), '1920px', null, true),
+      ];
+    }
+  }
+
+  // champ ACF repeater
+  // $examples = [];
+
+  // for ($i = 0; $i <= $data['examples']; $i++) {
+  //   $examples[] = [
+  //     'name' => $data['examples_' . $i . '_name'],
+  //   ];
+  // }
+
+    return [
+        'projects' => $items
+    ];
+  }
 }

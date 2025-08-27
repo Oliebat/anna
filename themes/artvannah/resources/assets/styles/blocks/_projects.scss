@@ -1,0 +1,71 @@
+@use "../config" as *;
+@use "../mixins" as *;
+
+.b-projects {
+  position: relative;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  &__date { line-height: 1; }
+
+  &__title {
+    @include body-s;
+
+    line-height: 1;
+    font-weight: $medium;
+  }
+
+  &__image { overflow: hidden; }
+
+  @include media-breakpoint-up(lg) {
+    &__list {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    &__item { width: subcol(24, 12); }
+  }
+
+  @media (hover: hover) {
+    .b-projects__image {
+      position: relative;
+      overflow: hidden;
+
+      .image {
+        scale: 1.01;
+        transition: scale 0.7s $ease-smooth;
+      }
+
+      &::before {
+        content: "";
+        mix-blend-mode: overlay;
+        background: $primary;
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.7s $ease-smooth;
+      }
+    }
+
+    .b-projects__item:hover {
+      .b-projects__image {
+        &::before { opacity: 1; }
+
+        .image { scale: 1; }
+      }
+    }
+  }
+}

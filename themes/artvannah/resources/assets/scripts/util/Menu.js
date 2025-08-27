@@ -1,3 +1,5 @@
+import store from './store'
+
 /**
  * Menu class for handling menu open/close events.
  * @class
@@ -33,7 +35,13 @@ export default class Menu {
    * @method
    * @returns {void}
    */
-  getElems() { }
+  getElems() {
+    this.$header = document.querySelector('header')
+    this.$hero = document.querySelector('.b-hero')
+    this.$heroTitle = document.querySelector('.b-hero__title')
+
+    this.heroHeight = this.$hero.clientHeight
+  }
 
   /**
    * Adds the event listeners.
@@ -92,7 +100,17 @@ export default class Menu {
    * @method
    * @returns {void}
    */
-  scroll() { }
+  scroll() {
+    const scrollY = window.scrollY || window.pageYOffset
+
+    if (scrollY > this.heroHeight / 2) {
+      this.$header.classList.add('header--dark')
+      if (this.$heroTitle) this.$heroTitle.classList.add('b-hero__title--dark')
+    } else {
+      this.$header.classList.remove('header--dark')
+      if (this.$heroTitle) this.$heroTitle.classList.remove('b-hero__title--dark')
+    }
+  }
 
   /**
    * Handles the page change event.

@@ -1,5 +1,11 @@
 @use "../config/breakpoints" as *;
 
+/*
+  @param {number} $parent-nb: nombre de colonnes du parent
+  @param {number} $col-nb: nombre de colonnes désiré
+  @var {number} $grid-gutter-width: la largeur sans unité de la goutière bootstrap
+  @return {number} percentage
+*/
 @function subcol($parent-nb, $col-nb) {
   $guttersWidth: ($parent-nb - 1) * $gutter-size;
   $gutter-nb: 0;
@@ -11,6 +17,12 @@
   @return calc((100% - #{$guttersWidth}) / #{$parent-nb} * #{$col-nb} + (#{$gutter-size} * #{$gutter-nb}));
 }
 
+/*
+  @param {number} $parent-nb: nombre de colonnes du parent
+  @param {number} $col-nb: nombre de colonnes désiré
+  @param {bool} $first: booléen par defaut false, true si l'élément est le premier enfant
+  @return {number} percentage
+*/
 @function submargin($parent-nb, $col-nb, $first: false) {
   $guttersWidth: ($parent-nb - 1) * $gutter-size;
   $endGutter: 0;

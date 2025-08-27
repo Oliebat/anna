@@ -9,7 +9,11 @@ const blockList = [
   {
     name: 'c-video',
     fileName: 'Video'
-  }/* generated class */
+  }, /* generated class */
+  {
+    name: 'b-projects',
+    fileName: 'Projects'
+  }
 ]
 
 export default blockList
