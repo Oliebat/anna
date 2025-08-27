@@ -10,8 +10,18 @@ $danger: #e6214b;
 $primary: #243546;
 
 /* FONTS */
-$font-default: "Arial", sans-serif;
-$font-heading: "Arial", sans-serif;
+$font-default: "Roboto", sans-serif;
+$font-heading: "Roboto", sans-serif;
+
+$light: 200;
+$thin: $light;
+$regular: 400;
+$normal: $regular;
+$medium: 500;
+$semi-bold: 600;
+$bold: 700;
+$heavy: 900;
+$extra-bold: $heavy;
 
 /* EASINGS */
 $ease-out: cubic-bezier(0.23, 1, 0.32, 1);

@@ -74,6 +74,9 @@ class App extends Controller {
         'clientId' => get_option('clientid'),
         'userId' => get_option('userid'),
         'accessToken' => get_option('accesstoken')
+      ],
+      'header' => [
+        'h_button' => $options['h_button']
       ]
     ];
   }
