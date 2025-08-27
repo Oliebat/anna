@@ -26,7 +26,10 @@
                 </div>
                 <div class="b-projects__content">
                   <h2 class="b-projects__title">{{ $item['title'] }}</h2>
-                  <span class="b-projects__date u-font-tag">{{ $item['date'] }}</span>
+                  <div class="b-projects__meta">
+                    <span class="b-projects__date u-font-tag">{{ $item['date'] }}</span>
+                    <span class="b-projects__more u-font-tag">Voir plus →</span>
+                  </div>
                 </div>
                 @if( $item['tags'] )
                   <div class="b-projects__tags">
