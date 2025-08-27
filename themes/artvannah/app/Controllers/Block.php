@@ -34,5 +34,11 @@ class Block extends Controller {
       'id' => $data['id-form']
     ];
   }
-  // generated function here
+
+  public static function hero($data) {
+      return [
+          'title' => $data['title'],
+          'image' => Element::image($data['image'], '1920px')
+      ];
+  }
 }
