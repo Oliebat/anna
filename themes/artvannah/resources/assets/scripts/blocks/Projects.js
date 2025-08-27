@@ -37,39 +37,16 @@ export default class Projects extends Block {
     const date = meta.querySelector('.b-projects__date')
     const more = meta.querySelector('.b-projects__more')
 
-    gsap.set(more, {
-      opacity: 0,
-      y: 10
-    })
+    gsap.set(more, { y: '100%' })
     
     meta.addEventListener('mouseenter', () => {
-      gsap.to(date, {
-        opacity: 0,
-        y: -10,
-        duration: 0.7,
-        ease: 'power2.out'
-      })
-      gsap.to(more, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: 'power2.out'
-      })
+      gsap.set(date, { y: '-100%' })
+      gsap.set(more, { y: '0%' })
     })
 
     meta.addEventListener('mouseleave', () => {
-      gsap.to(date, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: 'power2.out'
-      })
-      gsap.to(more, {
-        opacity: 0,
-        y: 10,
-        duration: 0.7,
-        ease: 'power2.out'
-      })
+      gsap.set(date, { y: '0%' })
+      gsap.set(more, { y: '100%' })
     })
   })
 }
