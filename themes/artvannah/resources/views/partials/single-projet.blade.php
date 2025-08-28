@@ -71,8 +71,14 @@
       </div>
     </div>
   </section>
-   <section class="s-projet-content">
-      <!-- the_content -->
-   </section>
+  <section class="s-projet-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-24 col-md-20 col-lg-18 col-xl-16 m-auto">
+          {!! the_content() !!}
+        </div>
+      </div>
+    </div>
+  </section>
  </div>
 </div>

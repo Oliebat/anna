@@ -27,7 +27,7 @@ class Single extends Controller
       'date' => get_field('date', $post_id),
       'subtitle' => get_field('subtitle', $post_id),
       'detail' => get_field('detail', $post_id),
-      'content' => get_field('content', $post->post_content),
+      'content' => get_field('content', $post_id),
       'slider' => $images,
       'descSlider' => get_field('description_slider', $post_id)
     ];

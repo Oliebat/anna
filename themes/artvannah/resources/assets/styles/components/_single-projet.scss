@@ -1,5 +1,5 @@
 @use "../config" as *;
-@use '../mixins' as *;
+@use "../mixins" as *;
 
 $postTitleFont: "Arial", sans-serif;
 $postContentFont: "Arial", sans-serif;
@@ -42,7 +42,7 @@ $postContentColor: $black;
     &__wrapper {
       display: flex;
       gap: 3rem;
-      margin-bottom: $margin-m
+      margin-bottom: $margin-m;
     }
 
     &__image {
@@ -169,7 +169,6 @@ $postContentColor: $black;
         gap: 1rem;
       }
     }
-
   }
 
   @include media-breakpoint-up(xl) {
