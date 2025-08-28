@@ -10,8 +10,6 @@
     gap: 2rem;
   }
 
-  &__image { aspect-ratio: 16 / 9; }
-
   &__content {
     display: flex;
     justify-content: space-between;
@@ -54,7 +52,10 @@
     font-weight: $medium;
   }
 
-  &__image { overflow: hidden; }
+  &__image {
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+  }
 
   @include media-breakpoint-up(lg) {
     &__list {

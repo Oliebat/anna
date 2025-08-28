@@ -1,4 +1,5 @@
 @use "../config" as *;
+@use '../mixins' as *;
 
 $postTitleFont: "Arial", sans-serif;
 $postContentFont: "Arial", sans-serif;
@@ -6,7 +7,7 @@ $postTitleColor: $black;
 $postContentColor: $black;
 
 .single-projet {
-  .hero {
+  .s-projet-hero {
     padding: $margin-xxl 0 $margin-m 0;
 
     &__wrapper {
@@ -32,7 +33,35 @@ $postContentColor: $black;
     &__detail { display: block; }
   }
 
-  .post-content {
+  .s-projet-slider {
+    &__container {
+      padding-left: submargin(24, 0);
+      overflow: hidden;
+    }
+
+    &__wrapper {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: $margin-m
+    }
+
+    &__image {
+      min-width: 30rem;
+      user-select: none;
+      aspect-ratio: 16 / 9;
+    }
+
+    &__pagers {
+      display: none;
+    }
+
+    &__bottom {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .s-projet-content {
     h2 {
       font-family: $postTitleFont;
       font-size: 2.5rem;
@@ -129,8 +158,22 @@ $postContentColor: $black;
     }
   }
 
+  @include media-breakpoint-up(md) {
+    .s-projet-slider {
+      &__container { padding-left: 2rem; }
+
+      &__image { min-width: 30rem; }
+
+      &__pagers {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+
+  }
+
   @include media-breakpoint-up(xl) {
-    .hero {
+    .s-projet-hero {
       height: 100vh;
 
       &__wrapper {
@@ -144,5 +187,7 @@ $postContentColor: $black;
         height: 100%;
       }
     }
+
+    .s-projet-slider__image { min-width: 45rem; }
   }
 }
