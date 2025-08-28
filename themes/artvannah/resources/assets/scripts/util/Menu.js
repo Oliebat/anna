@@ -40,7 +40,7 @@ export default class Menu {
     this.$hero = document.querySelector('.b-hero')
     this.$heroTitle = document.querySelector('.b-hero__title')
 
-    this.heroHeight = this.$hero.clientHeight
+    if (this.$heroTitle) this.heroHeight = this.$hero.clientHeight
   }
 
   /**

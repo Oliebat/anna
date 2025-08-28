@@ -10,6 +10,8 @@
     gap: 2rem;
   }
 
+  &__image { aspect-ratio: 16 / 9; }
+
   &__content {
     display: flex;
     justify-content: space-between;
@@ -35,8 +37,6 @@
   }
 
   &__more {
-    // @include body-lg;
-
     text-transform: uppercase;
     line-height: 1em;
     font-weight: $bold;

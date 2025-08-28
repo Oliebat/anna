@@ -11,8 +11,6 @@
  $data = Block::projects($block['data']);
 @endphp
 
-{{-- @php  echo "<pre style='position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; height:70vh;overflow-y: scroll;font-size: 1rem;padding: 10px; font-family: Consolas, Monospace; background-color: #000; color: #fff;'>", var_dump($data['projects']), "</pre>"; @endphp --}}
-
 <section class="b-projects u-padding">
   <div class="container-fluid">
     <div class="row">

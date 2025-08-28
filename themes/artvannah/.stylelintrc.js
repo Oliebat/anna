@@ -4,6 +4,14 @@ module.exports = {
     'no-empty-source': null,
     'string-quotes': 'double',
     'no-descending-specificity': null,
+    'property-no-unknown': [
+      true,
+      {
+        'ignoreProperties': [
+          'aspect-ratio',
+        ],
+      },
+    ],
     'at-rule-no-unknown': [
       true,
       {
