@@ -21,12 +21,20 @@ class Single extends Controller
       }
     }
 
+    $details = get_field('detail', $post_id) ?: [];
+
+    if (get_field('date', $post_id)) {
+      $details[] = [
+        'details' => get_field('date', $post_id)
+      ];
+    }
+
     return [
       'title' => $post->post_title,
       'image' => Element::image(get_post_thumbnail_id($post_id), '1920px', null, true),
       'date' => get_field('date', $post_id),
       'subtitle' => get_field('subtitle', $post_id),
-      'detail' => get_field('detail', $post_id),
+      'detail' => $details,
       'content' => get_field('content', $post_id),
       'slider' => $images,
       'descSlider' => get_field('description_slider', $post_id)

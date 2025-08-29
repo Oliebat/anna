@@ -1,4 +1,6 @@
 import store from './store'
+import { gsap } from 'gsap'
+import { SplitText } from 'gsap/SplitText'
 
 /**
  * Menu class for handling menu open/close events.
@@ -17,6 +19,7 @@ export default class Menu {
     this.bindMethods()
     this.getElems()
     this.addEvents()
+    this.handleHeaderReveal()
 
     this.onPageChange(window.location.href)
   }
@@ -39,8 +42,60 @@ export default class Menu {
     this.$header = document.querySelector('header')
     this.$hero = document.querySelector('.b-hero')
     this.$heroTitle = document.querySelector('.b-hero__title')
+    this.$logo = document.querySelector('.header__logo')
+    this.$button = document.querySelector('.header__button')
+    console.log(this.$button, this.$logo)
+
 
     if (this.$heroTitle) this.heroHeight = this.$hero.clientHeight
+  }
+
+  handleHeaderReveal() {
+    if (!this.$logo || !this.$button) return
+
+    gsap.registerPlugin(SplitText)
+
+    this.splitLogo = SplitText.create(this.$logo, {
+      type: 'lines',
+      linesClass: 'line',
+      aria: 'auto'
+    })
+
+    gsap.set(this.$logo, { opacity: 1 })
+    gsap.from(this.splitLogo.lines, {
+      yPercent: 100,
+      opacity: 0,
+      ease: 'sine.out',
+      delay: 3
+    })
+
+    this.splitButton = SplitText.create(this.$button, {
+      type: 'lines',
+      linesClass: 'line',
+      aria: 'auto'
+    })
+
+    gsap.set(this.$button, { opacity: 1 })
+    gsap.from(this.splitButton.lines, {
+      yPercent: 100,
+      opacity: 0,
+      ease: 'sine.out',
+      delay: 3
+    })
+
+    this.splitTitle = SplitText.create(this.$heroTitle, {
+      type: 'lines',
+      linesClass: 'line',
+      aria: 'auto'
+    })
+
+    gsap.set(this.$heroTitle, { opacity: 1 })
+    gsap.from(this.splitTitle.lines, {
+      yPercent: 100,
+      opacity: 0,
+      ease: 'sine.out',
+      delay: 3.5
+    })
   }
 
   /**
