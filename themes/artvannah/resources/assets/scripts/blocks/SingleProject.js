@@ -1,10 +1,12 @@
 import Block from './Block'
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 export default class SingleProject extends Block {
   onEnterCompleted() {
     this.handleReveal()
+    this.handleScrollAnimations()
   }
 
   getElems() {
@@ -13,6 +15,9 @@ export default class SingleProject extends Block {
     this.$description = this.el.querySelector('.s-projet-hero__description')
     this.$details = this.el.querySelectorAll('.s-projet-hero__detail')
     this.$detailsContainer = this.el.querySelectorAll('.s-projet-hero__details')
+    this.$sliderContainer = this.el.querySelector('.s-projet-slider__container')
+    this.$sliderArrow = this.el.querySelector('.s-projet-slider__pagers.u-pagers')
+    this.$sliderDesc = this.el.querySelector('.s-projet-slider__desc.u-pagers')
   }
 
   handleReveal() {
@@ -95,9 +100,72 @@ export default class SingleProject extends Block {
     }
   }
 
+  handleScrollAnimations() {
+    if (!this.$sliderContainer) return
+
+    gsap.registerPlugin(ScrollTrigger)
+    gsap.registerPlugin(SplitText)
+
+    gsap.from(this.$sliderContainer, {
+      yPercent: 100,
+      opacity: 0,
+      duration: 1,
+      ease: 'sine.out',
+      scrollTrigger: {
+        trigger: this.$sliderContainer,
+        start: 'top 100%',
+        toggleActions: 'play none none none'
+      }
+    })
+
+    if (this.$sliderArrow) {
+      gsap.from(this.$sliderArrow, {
+        yPercent: 100,
+        opacity: 0,
+        duration: 1,
+        ease: 'sine.out',
+        scrollTrigger: {
+          trigger: this.$sliderArrow,
+          start: 'top 100%',
+          toggleActions: 'play none none none',
+          markers: true
+        }
+      })
+    }
+
+    if (this.$sliderDesc) {
+      this.splitSliderDesc = SplitText.create(this.$sliderDesc, {
+        type: 'lines',
+        linesClass: 'line',
+        aria: 'auto'
+      })
+
+      gsap.set(this.$sliderDesc, { opacity: 1 })
+
+      this.splitSliderDesc.lines.forEach((line, index) => {
+        gsap.from(line.children[0], {
+          yPercent: 100,
+          opacity: 0,
+          ease: 'sine.out',
+          scrollTrigger: {
+            trigger: this.$sliderDesc,
+            start: 'top 60%',
+            toggleActions: 'play none none none'
+          },
+          delay: index * 0.05
+        })
+      })
+    }
+  }
+
+
   onLeave() {
     if (this.splitTitle) this.splitTitle.revert()
     if (this.splitSubtitle) this.splitSubtitle.revert()
     if (this.splitDescription) this.splitDescription.revert()
+    if (this.splitSliderDesc) this.splitSliderDesc.revert()
+    ScrollTrigger.getAll().forEach((st) => st.kill())
   }
+
+
 }

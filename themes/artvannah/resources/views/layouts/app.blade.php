@@ -25,7 +25,7 @@
               <span>AV</span>
             </div>
             <div class="panel__text">
-              <span class="u-font-tag">(plasticienne - designer)</span>
+              <span class="u-font-tag .u-uppercase">( industriaL design - communication strategy )</span>
             </div>
         </div>
         <div class="panel__preloader">
