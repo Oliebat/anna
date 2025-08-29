@@ -30,7 +30,11 @@
             @if($data['detail'])
               <div class="s-projet-hero__details">
                 @foreach($data['detail'] as $detail_item)
-                  <span class="s-projet-hero__detail">{{ $detail_item['details'] }}</span>
+                  <div class="s-projet-hero__detail">
+                    <span class="s-projet-hero__detail s-projet-hero__detail--inner">
+                      {{ $detail_item['details'] }}
+                    </span>
+                  </div>
                 @endforeach
               </div>
             @endif

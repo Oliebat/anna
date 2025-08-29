@@ -7,7 +7,6 @@ export default class Projects extends Block {
     gsap.registerPlugin(ScrollTrigger)
 
     this.onScroll()
-    this.initHoverAnimations()
   }
 
   getElems() {
@@ -31,23 +30,4 @@ export default class Projects extends Block {
       })
     })
   }
-
-  initHoverAnimations() {
-  this.$metas.forEach((meta) => {
-    const date = meta.querySelector('.b-projects__date')
-    const more = meta.querySelector('.b-projects__more')
-
-    gsap.set(more, { y: '100%' })
-    
-    meta.addEventListener('mouseenter', () => {
-      gsap.set(date, { y: '-100%' })
-      gsap.set(more, { y: '0%' })
-    })
-
-    meta.addEventListener('mouseleave', () => {
-      gsap.set(date, { y: '0%' })
-      gsap.set(more, { y: '100%' })
-    })
-  })
-}
 }

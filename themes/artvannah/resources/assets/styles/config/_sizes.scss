@@ -1,6 +1,10 @@
 @use "./breakpoints" as *;
 @use "./variables" as *;
 
+@mixin loader() {
+  font: $bold clamp(13.4rem, 75.3333px + 16.2963vw, 31rem) / 1.15 $font-heading;
+}
+
 @mixin title-1() {
   font: $bold clamp(4.4rem, 3.2rem + 3.3333vw, 8rem) / 1.15 $font-heading;
 }

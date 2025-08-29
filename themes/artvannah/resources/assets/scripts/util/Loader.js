@@ -14,11 +14,18 @@ export default class Loader {
 
   getElems() {
     store.panel = document.querySelector('.panel')
+    this.$progress = store.panel.querySelector('.panel__progress')
+    this.$logo = store.panel.querySelector('.panel__logo')
+
+    console.log(this.$logo, this.$progress)
   }
 
   play() {
     return new Promise((resolve) => {
       const tl = gsap.timeline({
+        defaults: {
+          duration: 1
+        },
         onComplete: () => {
           store.smoothScroll.start()
 
@@ -28,17 +35,32 @@ export default class Loader {
 
           store.isFirstLoaded = true
 
-          resolve()
+          // resolve()
         }
       })
 
       // eslint-disable-next-line prefer-reflect
       tl
+        .to(this.$progress, {
+          width: '60%',
+          ease: 'power4.inOut'
+        })
+        .to(this.$logo.children[0], {
+            transform: 'translateY(-100%)',
+            ease: 'power4.inOut'
+        }, '<')
+        .to(this.$logo.children[1], {
+            transform: 'translateY(0)',
+            ease: 'power4.inOut'
+        }, '<')
+        .to(this.$progress, {
+          width: '100%',
+          ease: 'power4.inOut'
+        }, '+=0.2')
         .to(store.panel, {
           opacity: 0,
-          duration: 0.8,
-          ease: 'power3.out'
-        })
+          ease: 'power4.out'
+        }, '>')
     })
   }
 }

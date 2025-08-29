@@ -24,13 +24,42 @@ $postContentColor: $black;
       &--inner { gap: $margin-m; }
     }
 
-    &__title { font-weight: $thin; }
+    &__title {
+      font-weight: $thin;
+      overflow: hidden;
+      opacity: 0;
+    }
 
-    &__subtitle { @include title-3; }
+    .char {
+      display: inline-block;
+    }
 
-    &__details { margin-top: $margin-m; }
+    &__subtitle {
+      @include title-3;
 
-    &__detail { display: block; }
+      opacity: 0;
+    }
+
+    .word { display: inline-block; }
+
+    &__description {
+      opacity: 0;
+
+      .line {
+        display: block;
+        overflow: hidden;
+      }
+    }
+
+    &__details {
+      margin-top: $margin-m;
+      opacity: 0;
+    }
+
+    &__detail {
+      display: flex;
+      overflow: hidden;
+    }
   }
 
   .s-projet-slider {

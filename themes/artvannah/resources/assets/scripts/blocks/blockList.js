@@ -17,6 +17,10 @@ const blockList = [
   {
     name: 's-projet-slider',
     fileName: 'ProjectSlider'
+  },
+  {
+    name: 'single-projet',
+    fileName: 'SingleProject'
   }
 ]
 

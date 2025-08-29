@@ -2,12 +2,90 @@
 
 .panel {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
+  inset: 0;
+  width: 100%;
   height: 100vh;
-  background-color: $white;
+  background-color: $black;
+  color: $white;
   pointer-events: none;
   z-index: $z-loader;
+
+  &__progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: max(0.2rem, 2px);
+    width: 0;
+    background-color: $white;
+  }
+
+  &__preloader {
+    position: absolute;
+    inset: auto 1rem 1rem auto;
+    z-index: 1;
+    width: 2rem;
+    height: 2rem;
+    animation: rotate-infinite 1s linear infinite;
+  }
+
+  @keyframes rotate-infinite {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem;
+    height: 100%;
+  }
+
+  &__logo {
+    position: relative;
+    display: flex;
+    width: fit-content;
+    overflow: hidden;
+
+    @include loader;
+
+    span {
+      font-weight: $medium;
+      line-height: 0.8;
+
+      &:nth-child(1) { transform: translateY(0); }
+
+      &:nth-child(2) {
+        display: flex;
+        position: absolute;
+        white-space: nowrap;
+        inset: 0 0 auto auto;
+        text-transform: uppercase;
+        transform: translateY(100%);
+      }
+    }
+  }
+
+  &__text {
+    text-transform: uppercase;
+
+    span { font-weight: $medium; }
+  }
+
+  @include media-breakpoint-up(md) {
+    &__wrapper {
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-end;
+      padding: 2rem;
+      gap: $margin-m;
+    }
+
+    &__preloader {
+      inset: auto 2rem 2rem auto;
+    }
+  }
 }
 

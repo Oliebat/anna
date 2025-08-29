@@ -17,7 +17,21 @@
         @yield('content')
       </main>
 
-      <div class="panel"></div>
+      <div class="panel">
+        <div class="panel__progress"></div>
+        <div class="panel__wrapper">
+            <div class="panel__logo">
+              <span>AV</span>
+              <span>AV</span>
+            </div>
+            <div class="panel__text">
+              <span class="u-font-tag">(plasticienne - designer)</span>
+            </div>
+        </div>
+        <div class="panel__preloader">
+          {!! display_svg('preloader') !!}
+        </div>
+      </div>
 
       @include('partials.footer')
 
