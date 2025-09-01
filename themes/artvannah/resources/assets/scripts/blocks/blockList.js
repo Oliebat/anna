@@ -15,6 +15,10 @@ const blockList = [
     fileName: 'Projects'
   },
   {
+    name: 'b-hero',
+    fileName: 'Hero'
+  },
+  {
     name: 's-projet-slider',
     fileName: 'ProjectSlider'
   },

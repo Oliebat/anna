@@ -1,6 +1,5 @@
 import store from './store'
 import { gsap } from 'gsap'
-import { SplitText } from 'gsap/SplitText'
 
 /**
  * Menu class for handling menu open/close events.
@@ -19,7 +18,8 @@ export default class Menu {
     this.bindMethods()
     this.getElems()
     this.addEvents()
-    this.handleHeaderReveal()
+
+    if (!store.isFirstLoaded) this.setPositions()
 
     this.onPageChange(window.location.href)
   }
@@ -40,62 +40,8 @@ export default class Menu {
    */
   getElems() {
     this.$header = document.querySelector('header')
-    this.$hero = document.querySelector('.b-hero')
-    this.$heroTitle = document.querySelector('.b-hero__title')
     this.$logo = document.querySelector('.header__logo')
     this.$button = document.querySelector('.header__button')
-    console.log(this.$button, this.$logo)
-
-
-    if (this.$heroTitle) this.heroHeight = this.$hero.clientHeight
-  }
-
-  handleHeaderReveal() {
-    if (!this.$logo || !this.$button) return
-
-    gsap.registerPlugin(SplitText)
-
-    this.splitLogo = SplitText.create(this.$logo, {
-      type: 'lines',
-      linesClass: 'line',
-      aria: 'auto'
-    })
-
-    gsap.set(this.$logo, { opacity: 1 })
-    gsap.from(this.splitLogo.lines, {
-      yPercent: 100,
-      opacity: 0,
-      ease: 'sine.out',
-      delay: 3
-    })
-
-    this.splitButton = SplitText.create(this.$button, {
-      type: 'lines',
-      linesClass: 'line',
-      aria: 'auto'
-    })
-
-    gsap.set(this.$button, { opacity: 1 })
-    gsap.from(this.splitButton.lines, {
-      yPercent: 100,
-      opacity: 0,
-      ease: 'sine.out',
-      delay: 3
-    })
-
-    this.splitTitle = SplitText.create(this.$heroTitle, {
-      type: 'lines',
-      linesClass: 'line',
-      aria: 'auto'
-    })
-
-    gsap.set(this.$heroTitle, { opacity: 1 })
-    gsap.from(this.splitTitle.lines, {
-      yPercent: 100,
-      opacity: 0,
-      ease: 'sine.out',
-      delay: 3.5
-    })
   }
 
   /**
@@ -105,6 +51,20 @@ export default class Menu {
    */
   addEvents() {
     this.toggler && this.toggler.addEventListener('click', this.toggle)
+
+    if (!store.isFirstLoaded) window.addEventListener('loaderComplete', () => this.handleHeaderReveal())
+  }
+
+  setPositions() {
+    gsap.set([this.$logo, this.$button], { yPercent: 100 })
+  }
+
+   handleHeaderReveal() {
+    gsap.to([this.$logo, this.$button], {
+      yPercent: 0,
+      ease: 'sine.out',
+      delay: store.isFirstLoaded ? '0.5' : '0'
+    })
   }
 
   /**
@@ -156,15 +116,12 @@ export default class Menu {
    * @returns {void}
    */
   scroll() {
+    if (window.location.href.indexOf('projet') > -1) return
+
     const scrollY = window.scrollY || window.pageYOffset
 
-    if (scrollY > this.heroHeight / 2) {
-      this.$header.classList.add('header--dark')
-      if (this.$heroTitle) this.$heroTitle.classList.add('b-hero__title--dark')
-    } else {
-      this.$header.classList.remove('header--dark')
-      if (this.$heroTitle) this.$heroTitle.classList.remove('b-hero__title--dark')
-    }
+    if (scrollY > store.heroHeight / 2) this.$header.classList.add('header--dark')
+    else this.$header.classList.remove('header--dark')
   }
 
   /**
@@ -174,5 +131,13 @@ export default class Menu {
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
-  onPageChange(loc) { }
+  onPageChange(loc) {
+    if (store.isFirstLoaded) {
+      this.setPositions()
+      this.handleHeaderReveal()
+    }
+
+    if (loc.indexOf('projet') > -1) this.$header.classList.add('header--dark')
+    else this.$header.classList.remove('header--dark')
+  }
 }

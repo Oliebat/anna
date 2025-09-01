@@ -35,7 +35,7 @@ export default class Loader {
 
           store.isFirstLoaded = true
 
-          // resolve()
+          resolve()
         }
       })
 

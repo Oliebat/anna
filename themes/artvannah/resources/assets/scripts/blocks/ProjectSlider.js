@@ -4,6 +4,8 @@ import { gsap } from 'gsap'
 
 export default class ProjectSlider extends Block {
   onEnterCompleted() {
+    this.$pagerLeft.classList.add('is-disabled')
+
     this.createSlider()
   }
 
@@ -28,7 +30,6 @@ export default class ProjectSlider extends Block {
   createSlider() {
     this.slider = new SlideManager({
       el: this.$wrapper,
-      loop: true,
       auto: true,
       length: this.$slides.length,
       callback: (event) => {
@@ -54,6 +55,9 @@ export default class ProjectSlider extends Block {
         duration: 0.3,
         ease: 'sine.out'
       })
+
+      this.$pagerLeft.classList.toggle('is-disabled', this.currentIndex === 0)
+      this.$pagerRight.classList.toggle('is-disabled', this.currentIndex === this.$slides.length - 1)
 
       resolve()
     })

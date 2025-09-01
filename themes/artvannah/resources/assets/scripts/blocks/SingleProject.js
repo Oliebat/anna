@@ -4,6 +4,11 @@ import { SplitText } from 'gsap/SplitText'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 export default class SingleProject extends Block {
+  init() {
+    gsap.registerPlugin(ScrollTrigger)
+    gsap.registerPlugin(SplitText)
+  }
+
   onEnterCompleted() {
     this.handleReveal()
     this.handleScrollAnimations()
@@ -22,8 +27,6 @@ export default class SingleProject extends Block {
 
   handleReveal() {
     if (!this.$title) return
-
-    gsap.registerPlugin(SplitText)
 
     this.splitTitle = SplitText.create(this.$title, {
       type: 'lines',
@@ -103,61 +106,49 @@ export default class SingleProject extends Block {
   handleScrollAnimations() {
     if (!this.$sliderContainer) return
 
-    gsap.registerPlugin(ScrollTrigger)
-    gsap.registerPlugin(SplitText)
+    if (this.$sliderDesc) {
+      this.splitSliderDesc = SplitText.create(this.$sliderDesc, {
+        type: 'lines',
+        linesClass: 'line u-overflow-hidden',
+        aria: 'auto'
+      })
+    }
 
-    gsap.from(this.$sliderContainer, {
-      yPercent: 100,
-      opacity: 0,
-      duration: 1,
-      ease: 'sine.out',
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: this.$sliderContainer,
-        start: 'top 100%',
+        start: 'top 60%',
         toggleActions: 'play none none none'
       }
     })
 
-    if (this.$sliderArrow) {
-      gsap.from(this.$sliderArrow, {
-        yPercent: 100,
-        opacity: 0,
-        duration: 1,
-        ease: 'sine.out',
-        scrollTrigger: {
-          trigger: this.$sliderArrow,
-          start: 'top 100%',
-          toggleActions: 'play none none none',
-          markers: true
-        }
+    gsap.set([this.$sliderContainer, this.$sliderArrow], {
+      yPercent: 25,
+      opacity: 0
+    })
+
+    if (this.$sliderDesc) {
+      this.splitSliderDesc.lines.forEach((line) => {
+        gsap.set(line.children[0], { yPercent: 100 })
       })
     }
 
-    if (this.$sliderDesc) {
-      this.splitSliderDesc = SplitText.create(this.$sliderDesc, {
-        type: 'lines',
-        linesClass: 'line',
-        aria: 'auto'
+    tl
+      .to([this.$sliderContainer, this.$sliderArrow], {
+        yPercent: 0,
+        opacity: 1
       })
 
-      gsap.set(this.$sliderDesc, { opacity: 1 })
-
-      this.splitSliderDesc.lines.forEach((line, index) => {
-        gsap.from(line.children[0], {
-          yPercent: 100,
-          opacity: 0,
-          ease: 'sine.out',
-          scrollTrigger: {
-            trigger: this.$sliderDesc,
-            start: 'top 60%',
-            toggleActions: 'play none none none'
-          },
-          delay: index * 0.05
-        })
+    if (this.$sliderDesc) {
+      this.splitSliderDesc.lines.forEach((line) => {
+        tl.to(line.children[0], {
+          yPercent: 0,
+          duration: 0.8,
+          ease: 'sine.out'
+        }, '<0.05')
       })
     }
   }
-
 
   onLeave() {
     if (this.splitTitle) this.splitTitle.revert()
